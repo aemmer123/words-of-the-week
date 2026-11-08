@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Words of the Week — Dvar Torah Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --parchment:   #f5efe0;
+  --parchment2:  #ede3cc;
+  --parchment3:  #e2d5b5;
+  --ink:         #1c1508;
+  --ink2:        #3b2e10;
+  --gold:        #b5872a;
+  --gold-light:  #d4a94a;
+  --gold-muted:  #c9a55a;
+  --blue:        #1e3a5f;
+  --blue-light:  #2a527f;
+  --red:         #8b2319;
+  --muted:       #6b5c3a;
+  --border:      rgba(90,65,20,0.20);
+  --border2:     rgba(90,65,20,0.10);
+  --shadow:      rgba(30,15,0,0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--parchment);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 18px;
+  line-height: 1.65;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ══════════════════════════════════════
+   HEADER / NAV
+══════════════════════════════════════ */
+header {
+  background: var(--blue);
+  border-bottom: 3px solid var(--gold);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.brand {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.45rem;
+  color: var(--gold-light);
+  padding: 0.9rem 0;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.brand em { font-style: italic; color: #fff; }
+
+nav { display: flex; gap: 0; flex: 1; }
+
+nav button {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.65);
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 1.1rem;
+  height: 100%;
+  min-height: 56px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+nav button:hover { color: #fff; }
+nav button.active { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+
+.header-shabbat {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.shabbat-pill {
+  background: rgba(181,135,42,0.18);
+  border: 1px solid rgba(181,135,42,0.35);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.shabbat-pill:hover { background: rgba(181,135,42,0.28); }
+.shabbat-pill .candle { margin-right: 4px; }
+
+/* ══════════════════════════════════════
+   PAGE SYSTEM
+══════════════════════════════════════ */
+.page { display: none; max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+.page.visible { display: block; }
+
+/* ══════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════ */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+  align-items: start;
+}
+
+.hero-left {}
+
+.ornament {
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3em;
+}
+
+.hero-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 3.8rem;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.hero-title em { color: var(--blue); font-style: italic; }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.hero-hebrew {
+  font-size: 1.6rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  direction: rtl;
+  margin-bottom: 1.5rem;
+  font-family: 'IM Fell English', serif;
+}
+
+.stat-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'IM Fell English', serif;
+  font-size: 2.2rem;
+  color: var(--blue);
+  display: block;
+  line-height: 1;
+}
+.stat-lbl {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* SHABBAT CARD */
+.shabbat-card {
+  background: var(--blue);
+  color: white;
+  border-radius: 4px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.shabbat-card::before {
+  content: '✡';
+  position: absolute;
+  right: -10px;
+  top: -20px;
+  font-size: 6rem;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.shabbat-card-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shabbat-card h3 {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.shabbat-card .parasha-name {
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+
+.time-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.time-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 0.6rem 0.8rem;
+}
+
+.time-item .t-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.time-item .t-value {
+  font-size: 1.05rem;
+  color: var(--gold-light);
+  font-family: 'IM Fell English', serif;
+}
+
+.location-btn {
+  width: 100%;
+  background: rgba(181,135,42,0.2);
+  border: 1px solid rgba(181,135,42,0.4);
+  color: var(--gold-light);
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.85rem;
+  padding: 0.45rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s;
+  letter-spacing: 0.04em;
+}
+.location-btn:hover { background: rgba(181,135,42,0.32); }
+
+/* PARASHA GRID */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+.section-count {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.parashot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.parasha-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--parchment3);
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+  transition: border-top-color 0.2s, transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+
+.parasha-card:hover {
+  border-top-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.parasha-card.has-dvar {
+  border-top-color: var(--blue);
+}
+
+.parasha-card.has-dvar:hover { border-top-color: var(--gold); }
+
+.parasha-card .book-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.parasha-card h4 {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.parasha-card .hebrew-name {
+  font-size: 1rem;
+  color: var(--gold);
+  direction: rtl;
+  margin-bottom: 0.5rem;
+}
+
+.parasha-card .excerpt {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.parasha-card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+
+.dvar-badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-family: 'Crimson Pro', serif;
+  letter-spacing: 0.05em;
+}
+
+.dvar-badge.written {
+  background: rgba(30,58,95,0.1);
+  color: var(--blue);
+}
+
+.dvar-badge.empty {
+  background: rgba(107,92,58,0.08);
+  color: var(--muted);
+}
+
+.parasha-card .date-hint {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════════════
+   WRITE PAGE
+══════════════════════════════════════ */
+.write-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.write-sidebar h3 {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+.parasha-picker {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.picker-item {
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border2);
+  transition: background 0.15s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.picker-item:hover { background: var(--parchment2); }
+.picker-item.selected { background: var(--blue); color: white; }
+.picker-item .pi-hebrew { font-size: 0.8rem; opacity: 0.65; }
+.picker-item.selected .pi-hebrew { opacity: 0.8; }
+
+.write-main h2 {
+  font-family: 'IM Fell English', serif;
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.selected-parasha-info {
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.form-group { margin-bottom: 1.1rem; }
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: white;
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 0.55rem 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+  border-radius: 2px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--gold); }
+
+.form-group textarea {
+  min-height: 320px;
+  resize: vertical;
+  line-height: 1.8;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: white;
+  border: none;
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 2rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: var(--blue-light); }
+
+.btn-secondary {
+  background: none;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.2rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--muted); color: var(--ink); }
+
+.btn-row { display: flex; gap: 0.75rem; align-items: center; }
+
+/* ══════════════════════════════════════
+   READER
+══════════════════════════════════════ */
+.reader-wrap { max-width: 680px; margin: 0 auto; }
+
+.reader-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0 0 1.5rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.reader-back:hover { color: var(--ink); }
+
+.reader-ornament {
+  text-align: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 1rem;
+}
+
+.reader-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 2.8rem;
+  line-height: 1.1;
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+.reader-hebrew {
+  text-align: center;
+  font-size: 1.6rem;
+  color: var(--gold);
+  direction: rtl;
+  margin-bottom: 0.5rem;
+}
+
+.reader-meta {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.reader-body {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--ink2);
+  white-space: pre-wrap;
+  font-weight: 300;
+}
+
+.reader-body p { margin-bottom: 1.2em; }
+
+.reader-shabbat-box {
+  margin-top: 3rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--blue);
+  color: white;
+  border-radius: 4px;
+}
+
+.reader-shabbat-box h4 {
+  font-family: 'IM Fell English', serif;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+/* ══════════════════════════════════════
+   SHABBAT TIMES MODAL
+══════════════════════════════════════ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,5,0,0.65);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--gold);
+  max-width: 480px;
+  width: 90%;
+  padding: 2rem;
+  position: relative;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.modal-close:hover { color: var(--ink); }
+
+.modal h2 {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.modal p.modal-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.location-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.loc-opt {
+  background: white;
+  border: 1.5px solid var(--border);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: center;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  color: var(--ink2);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.loc-opt:hover { border-color: var(--gold); background: var(--parchment2); }
+.loc-opt .loc-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+
+.divider-or {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.divider-or::before, .divider-or::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-or::before { left: 0; }
+.divider-or::after { right: 0; }
+
+.custom-location { display: flex; gap: 0.5rem; }
+.custom-location input {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: white;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--ink);
+  outline: none;
+  border-radius: 2px;
+}
+.custom-location input:focus { border-color: var(--gold); }
+
+.times-result {
+  margin-top: 1.25rem;
+  background: var(--blue);
+  color: white;
+  padding: 1.25rem;
+  border-radius: 3px;
+  display: none;
+}
+
+.times-result.show { display: block; }
+
+.times-result h4 {
+  font-family: 'IM Fell English', serif;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+}
+
+.times-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.t-cell {
+  background: rgba(255,255,255,0.07);
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+}
+
+.t-cell .tc-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  display: block;
+}
+
+.t-cell .tc-val {
+  font-family: 'IM Fell English', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+}
+
+/* ══════════════════════════════════════
+   ARCHIVE / ABOUT PAGES
+══════════════════════════════════════ */
+.page-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  font-family: 'IM Fell English', serif;
+  font-size: 2.2rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.page-header p { color: var(--muted); font-style: italic; }
+
+.book-section { margin-bottom: 2.5rem; }
+
+.book-heading {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.35rem;
+  color: var(--blue);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.book-heading .bk-hebrew {
+  font-size: 1rem;
+  color: var(--gold);
+  font-style: italic;
+}
+
+.archive-list { display: grid; gap: 0.5rem; }
+
+.archive-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.archive-item:hover { background: var(--parchment2); border-color: var(--border); }
+
+.archive-item .ai-name {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.05rem;
+  flex: 1;
+}
+
+.archive-item .ai-hebrew {
+  font-size: 0.9rem;
+  color: var(--gold);
+  direction: rtl;
+}
+
+.archive-item .ai-badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.archive-item .ai-badge.has { background: rgba(30,58,95,0.1); color: var(--blue); }
+.archive-item .ai-badge.none { background: rgba(107,92,58,0.07); color: var(--muted); }
+
+/* ABOUT */
+.about-columns {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
+}
+
+.about-body { font-size: 1.05rem; line-height: 1.9; font-weight: 300; }
+.about-body p { margin-bottom: 1.2em; }
+.about-body em { color: var(--blue); font-style: italic; }
+
+.about-sidebar h3 {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.15rem;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+.about-sidebar p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 0.65rem 1.4rem;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 2000;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--gold);
+}
+
+.toast.show { opacity: 1; }
+
+/* LOADING / EMPTY */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+  font-style: italic;
+  border: 1px dashed var(--border);
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.2s infinite;
+}
+
+@keyframes dots {
+  0%   { content: '.'; }
+  33%  { content: '..'; }
+  66%  { content: '...'; }
+  100% { content: ''; }
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.82rem;
+  padding: 4px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-btn:hover { border-color: var(--gold); color: var(--ink); }
+.filter-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+@media (max-width: 768px) {
+  .home-hero { grid-template-columns: 1fr; }
+  .write-layout { grid-template-columns: 1fr; }
+  .about-columns { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.5rem; }
+  nav button { padding: 0 0.6rem; font-size: 0.82rem; }
+}
+
+/* Editable About + multi-year Dvar Torah styles */
+.about-editor { margin-top: 1.25rem; }
+.about-editor textarea { width:100%; min-height:260px; padding:1rem; border:1px solid var(--border); background:rgba(255,255,255,.55); font:1rem/1.7 'Crimson Pro',serif; color:var(--ink); resize:vertical; }
+.about-actions { display:flex; gap:.7rem; margin-top:.8rem; }
+.about-saved { white-space:pre-wrap; }
+.entry-list { margin: 1rem 0 1.5rem; padding: .8rem; border:1px solid var(--border); background:rgba(255,255,255,.28); }
+.entry-list h4 { margin:.1rem 0 .7rem; font-family:'IM Fell English',serif; }
+.entry-row { display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:.65rem 0; border-top:1px solid rgba(120,90,40,.18); }
+.entry-row:first-of-type { border-top:0; }
+.entry-info { flex:1; }
+.entry-title { font-weight:600; }
+.entry-year { color:var(--muted); font-size:.9rem; margin-left:.35rem; }
+.entry-actions { display:flex; gap:.4rem; }
+.entry-btn { border:1px solid var(--border); background:transparent; padding:.35rem .65rem; cursor:pointer; font:inherit; }
+.entry-btn:hover { background:rgba(120,90,40,.08); }
+.multi-badge { color:var(--muted); font-size:.82rem; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="brand" onclick="showPage('home')"><em>Words</em> of the Week</div>
+    <nav>
+      <button class="active" onclick="showPage('home')">Home</button>
+      <button onclick="showPage('archive')">Archive</button>
+      <button onclick="showPage('write')">Write</button>
+      <button onclick="showPage('about')">About</button>
+    </nav>
+    <div class="header-shabbat">
+      <div class="shabbat-pill" onclick="openModal()">
+        <span class="candle">🕯️</span>
+        <span id="header-times">Shabbat Times</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ HOME PAGE ══ -->
+<div class="page visible" id="page-home">
+  <div class="home-hero">
+    <div class="hero-left">
+      <div class="ornament">✦ ✦ ✦</div>
+      <h1 class="hero-title">Words of<br><em>the Week</em></h1>
+      <p class="hero-sub">A Dvar Torah for every Parasha, every year.</p>
+      <div class="hero-hebrew">דברי תורה</div>
+      <div class="stat-row" id="home-stats"></div>
+    </div>
+    <div class="shabbat-card" id="home-shabbat-card">
+      <div class="shabbat-card-label">🕯️ This Shabbat</div>
+      <h3 id="sc-parasha">Loading…</h3>
+      <div class="parasha-name" id="sc-parasha-heb"></div>
+      <div class="time-row" id="sc-times">
+        <div class="time-item">
+          <span class="t-label">Candle Lighting</span>
+          <span class="t-value" id="sc-candles">—</span>
+        </div>
+        <div class="time-item">
+          <span class="t-label">Havdalah</span>
+          <span class="t-value" id="sc-havdalah">—</span>
+        </div>
+      </div>
+      <button class="location-btn" onclick="openModal()">📍 Update Location</button>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterParashot('all', this)">All Parashot</button>
+    <button class="filter-btn" onclick="filterParashot('written', this)">Written</button>
+    <button class="filter-btn" onclick="filterParashot('empty', this)">Not Yet Written</button>
+    <button class="filter-btn" onclick="filterParashot('Bereshit', this)">Bereshit</button>
+    <button class="filter-btn" onclick="filterParashot('Shemot', this)">Shemot</button>
+    <button class="filter-btn" onclick="filterParashot('Vayikra', this)">Vayikra</button>
+    <button class="filter-btn" onclick="filterParashot('Bamidbar', this)">Bamidbar</button>
+    <button class="filter-btn" onclick="filterParashot('Devarim', this)">Devarim</button>
+  </div>
+
+  <div class="section-head">
+    <span class="section-title">The Parashot</span>
+    <span class="section-count" id="parashot-count"></span>
+  </div>
+  <div class="parashot-grid" id="parashot-grid"></div>
+</div>
+
+<!-- ══ ARCHIVE PAGE ══ -->
+<div class="page" id="page-archive">
+  <div class="page-header">
+    <h2>The Archive</h2>
+    <p>All Divrei Torah, organized by Sefer.</p>
+  </div>
+  <div id="archive-content"></div>
+</div>
+
+<!-- ══ WRITE PAGE ══ -->
+<div class="page" id="page-write">
+  <div class="write-layout">
+    <div class="write-sidebar">
+      <h3>Select Parasha</h3>
+      <div class="parasha-picker" id="parasha-picker"></div>
+    </div>
+    <div class="write-main">
+      <h2 id="write-title">Write a Dvar Torah</h2>
+      <div class="selected-parasha-info" id="write-sub">Select a Parasha from the list to begin.</div>
+      <div class="entry-list" id="saved-entries"></div>
+
+      <div class="form-group">
+        <label>Title / Theme (optional)</label>
+        <input type="text" id="f-title" placeholder="e.g. The Light Within the Darkness" />
+      </div>
+
+      <div class="form-group">
+        <label>Your Dvar Torah</label>
+        <textarea id="f-body" placeholder="Write your Dvar Torah here…"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Year (optional)</label>
+        <input type="number" id="f-year" placeholder="e.g. 5785" />
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="save-btn" onclick="saveDvar()">Save Dvar Torah</button>
+        <button class="btn-secondary" onclick="clearForm()">Clear</button>
+        <button class="btn-secondary" id="delete-btn" style="display:none; color:#8b2319;" onclick="deleteDvar()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ READER PAGE ══ -->
+<div class="page" id="page-reader">
+  <div class="reader-wrap">
+    <button class="reader-back" onclick="goBack()">← Back</button>
+    <div class="reader-ornament">✦ ✦ ✦</div>
+    <h1 class="reader-title" id="reader-parasha"></h1>
+    <div class="reader-hebrew" id="reader-hebrew"></div>
+    <div class="reader-meta" id="reader-meta"></div>
+    <div class="reader-body" id="reader-body"></div>
+    <div class="reader-shabbat-box" id="reader-shabbat" style="display:none">
+      <h4>🕯️ Shabbat Times</h4>
+      <div class="times-grid" id="reader-times-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT PAGE ══ -->
+<div class="page" id="page-about">
+  <div class="about-columns">
+    <div class="about-body">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+        <h2 style="font-family:'IM Fell English',serif;font-size:2rem;margin-bottom:1rem;">About this Archive</h2>
+        <button class="btn-secondary" id="edit-about-btn" onclick="editAbout()">Edit About Page</button>
+      </div>
+      <div id="about-display" class="about-saved"></div>
+      <div id="about-editor" class="about-editor" style="display:none;">
+        <textarea id="about-textarea"></textarea>
+        <div class="about-actions">
+          <button class="btn-primary" onclick="saveAbout()">Save About Page</button>
+          <button class="btn-secondary" onclick="cancelAboutEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div class="about-sidebar">
+      <h3>The 54 Parashot</h3>
+      <p>The Torah is divided into 54 weekly portions, read over the course of each Jewish year. Some weeks two portions are combined, completing the cycle by Simchat Torah.</p>
+      <h3 style="margin-top:1.5rem;">Data & Privacy</h3>
+      <p>All Divrei Torah and your custom About page are stored locally in your browser. Nothing is sent to any server. Shabbat times are fetched live from Hebcal.com when you request them.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SHABBAT TIMES MODAL ══ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>Shabbat Times</h2>
+    <p class="modal-sub">Get candle lighting & Havdalah times for your location.</p>
+
+    <div class="location-options">
+      <div class="loc-opt" onclick="detectLocation()">
+        <span class="loc-icon">📍</span>
+        Use My Location
+      </div>
+      <div class="loc-opt" onclick="useJerusalem()">
+        <span class="loc-icon">✡️</span>
+        Jerusalem
+      </div>
+    </div>
+
+    <div class="divider-or">or enter a city</div>
+
+    <div class="custom-location">
+      <input type="text" id="city-input" placeholder="e.g. New York, London, Tel Aviv" />
+      <button class="btn-primary" onclick="fetchByCity()">Search</button>
+    </div>
+
+    <div class="times-result" id="times-result">
+      <h4 id="tr-parasha">This Shabbat</h4>
+      <div class="times-grid" id="tr-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════
+const PARASHOT = [
+  // Bereshit
+  { id:'bereshit',    en:'Bereshit',    he:'בְּרֵאשִׁית', book:'Bereshit', ref:'Gen 1:1–6:8' },
+  { id:'noach',       en:'Noach',       he:'נֹחַ',         book:'Bereshit', ref:'Gen 6:9–11:32' },
+  { id:'lech-lecha',  en:'Lech Lecha',  he:'לֶךְ-לְךָ',   book:'Bereshit', ref:'Gen 12:1–17:27' },
+  { id:'vayera',      en:'Vayera',      he:'וַיֵּרָא',     book:'Bereshit', ref:'Gen 18:1–22:24' },
+  { id:'chayei-sara', en:'Chayei Sara', he:'חַיֵּי שָׂרָה', book:'Bereshit', ref:'Gen 23:1–25:18' },
+  { id:'toldot',      en:'Toldot',      he:'תּוֹלְדֹת',   book:'Bereshit', ref:'Gen 25:19–28:9' },
+  { id:'vayetzei',    en:'Vayetzei',    he:'וַיֵּצֵא',     book:'Bereshit', ref:'Gen 28:10–32:3' },
+  { id:'vayishlach',  en:'Vayishlach',  he:'וַיִּשְׁלַח', book:'Bereshit', ref:'Gen 32:4–36:43' },
+  { id:'vayeshev',    en:'Vayeshev',    he:'וַיֵּשֶׁב',    book:'Bereshit', ref:'Gen 37:1–40:23' },
+  { id:'miketz',      en:'Miketz',      he:'מִקֵּץ',       book:'Bereshit', ref:'Gen 41:1–44:17' },
+  { id:'vayigash',    en:'Vayigash',    he:'וַיִּגַּשׁ',  book:'Bereshit', ref:'Gen 44:18–47:27' },
+  { id:'vayechi',     en:'Vayechi',     he:'וַיְחִי',      book:'Bereshit', ref:'Gen 47:28–50:26' },
+  // Shemot
+  { id:'shemot',      en:'Shemot',      he:'שְׁמוֹת',     book:'Shemot', ref:'Ex 1:1–6:1' },
+  { id:'vaera',       en:"Va'era",      he:'וָאֵרָא',      book:'Shemot', ref:'Ex 6:2–9:35' },
+  { id:'bo',          en:'Bo',          he:'בֹּא',         book:'Shemot', ref:'Ex 10:1–13:16' },
+  { id:'beshalach',   en:'Beshalach',   he:'בְּשַׁלַּח',  book:'Shemot', ref:'Ex 13:17–17:16' },
+  { id:'yitro',       en:'Yitro',       he:'יִתְרוֹ',      book:'Shemot', ref:'Ex 18:1–20:23' },
+  { id:'mishpatim',   en:'Mishpatim',   he:'מִשְׁפָּטִים', book:'Shemot', ref:'Ex 21:1–24:18' },
+  { id:'terumah',     en:'Terumah',     he:'תְּרוּמָה',   book:'Shemot', ref:'Ex 25:1–27:19' },
+  { id:'tetzaveh',    en:'Tetzaveh',    he:'תְּצַוֶּה',   book:'Shemot', ref:'Ex 27:20–30:10' },
+  { id:'ki-tisa',     en:'Ki Tisa',     he:'כִּי תִשָּׂא', book:'Shemot', ref:'Ex 30:11–34:35' },
+  { id:'vayakhel',    en:'Vayakhel',    he:'וַיַּקְהֵל',  book:'Shemot', ref:'Ex 35:1–38:20' },
+  { id:'pekudei',     en:'Pekudei',     he:'פְקוּדֵי',    book:'Shemot', ref:'Ex 38:21–40:38' },
+  // Vayikra
+  { id:'vayikra',     en:'Vayikra',     he:'וַיִּקְרָא',  book:'Vayikra', ref:'Lev 1:1–5:26' },
+  { id:'tzav',        en:'Tzav',        he:'צַו',          book:'Vayikra', ref:'Lev 6:1–8:36' },
+  { id:'shemini',     en:'Shemini',     he:'שְּׁמִינִי',  book:'Vayikra', ref:'Lev 9:1–11:47' },
+  { id:'tazria',      en:'Tazria',      he:'תַזְרִיעַ',   book:'Vayikra', ref:'Lev 12:1–13:59' },
+  { id:'metzora',     en:'Metzora',     he:'מְּצֹרָע',    book:'Vayikra', ref:'Lev 14:1–15:33' },
+  { id:'acharei',     en:'Acharei Mot', he:'אַחֲרֵי מוֹת',book:'Vayikra', ref:'Lev 16:1–18:30' },
+  { id:'kedoshim',    en:'Kedoshim',    he:'קְדֹשִׁים',   book:'Vayikra', ref:'Lev 19:1–20:27' },
+  { id:'emor',        en:'Emor',        he:'אֱמֹר',        book:'Vayikra', ref:'Lev 21:1–24:23' },
+  { id:'behar',       en:'Behar',       he:'בְּהַר',       book:'Vayikra', ref:'Lev 25:1–26:2' },
+  { id:'bechukotai',  en:'Bechukotai',  he:'בְּחֻקֹּתַי', book:'Vayikra', ref:'Lev 26:3–27:34' },
+  // Bamidbar
+  { id:'bamidbar',    en:'Bamidbar',    he:'בְּמִדְבַּר',  book:'Bamidbar', ref:'Num 1:1–4:20' },
+  { id:'nasso',       en:'Nasso',       he:'נָשֹׂא',       book:'Bamidbar', ref:'Num 4:21–7:89' },
+  { id:'behaalotecha',en:"Beha'alotecha",he:'בְּהַעֲלֹתְךָ',book:'Bamidbar',ref:'Num 8:1–12:16' },
+  { id:'shelach',     en:'Shelach',     he:'שְׁלַח',       book:'Bamidbar', ref:'Num 13:1–15:41' },
+  { id:'korach',      en:'Korach',      he:'קֹרַח',        book:'Bamidbar', ref:'Num 16:1–18:32' },
+  { id:'chukat',      en:'Chukat',      he:'חֻקַּת',       book:'Bamidbar', ref:'Num 19:1–22:1' },
+  { id:'balak',       en:'Balak',       he:'בָּלָק',       book:'Bamidbar', ref:'Num 22:2–25:9' },
+  { id:'pinchas',     en:'Pinchas',     he:'פִּינְחָס',    book:'Bamidbar', ref:'Num 25:10–30:1' },
+  { id:'matot',       en:'Matot',       he:'מַּטּוֹת',     book:'Bamidbar', ref:'Num 30:2–32:42' },
+  { id:'masei',       en:"Masei",       he:'מַסְעֵי',      book:'Bamidbar', ref:'Num 33:1–36:13' },
+  // Devarim
+  { id:'devarim',     en:'Devarim',     he:'דְּבָרִים',    book:'Devarim', ref:'Deut 1:1–3:22' },
+  { id:'vaetchanan',  en:"Va'etchanan", he:'וָאֶתְחַנַּן', book:'Devarim', ref:'Deut 3:23–7:11' },
+  { id:'ekev',        en:'Ekev',        he:'עֵקֶב',        book:'Devarim', ref:'Deut 7:12–11:25' },
+  { id:'reeh',        en:"Re'eh",       he:'רְאֵה',        book:'Devarim', ref:'Deut 11:26–16:17' },
+  { id:'shoftim',     en:'Shoftim',     he:'שֹׁפְטִים',   book:'Devarim', ref:'Deut 16:18–21:9' },
+  { id:'ki-teitzei',  en:'Ki Teitzei',  he:'כִּי-תֵצֵא',  book:'Devarim', ref:'Deut 21:10–25:19' },
+  { id:'ki-tavo',     en:'Ki Tavo',     he:'כִּי-תָבוֹא', book:'Devarim', ref:'Deut 26:1–29:8' },
+  { id:'nitzavim',    en:'Nitzavim',    he:'נִצָּבִים',    book:'Devarim', ref:'Deut 29:9–30:20' },
+  { id:'vayelech',    en:'Vayelech',    he:'וַיֵּלֶךְ',    book:'Devarim', ref:'Deut 31:1–31:30' },
+  { id:'haazinu',     en:"Ha'azinu",    he:'הַאֲזִינוּ',   book:'Devarim', ref:'Deut 32:1–32:52' },
+  { id:'vzot-habracha',en:"V'Zot HaBeracha",he:'וְזֹאת הַבְּרָכָה',book:'Devarim',ref:'Deut 33:1–34:12' },
+];
+
+const BOOKS = ['Bereshit','Shemot','Vayikra','Bamidbar','Devarim'];
+const BOOK_HEBREW = { Bereshit:'בְּרֵאשִׁית', Shemot:'שְׁמוֹת', Vayikra:'וַיִּקְרָא', Bamidbar:'בְּמִדְבַּר', Devarim:'דְּבָרִים' };
+
+const STORAGE_KEY = 'wotw_dvars_v2';
+const ABOUT_KEY = 'wotw_about_v1';
+const LOC_KEY = 'wotw_location_v1';
+const DEFAULT_ABOUT = `Words of the Week is a personal Dvar Torah archive — a space to write, collect, and revisit Torah insights for every Parasha of the year.\n\nEach week brings a new opportunity to engage with the text. This archive holds those engagements: the questions asked, the connections made, the thoughts that emerged at the Shabbat table.\n\nUse the Write tab to compose a Dvar Torah for any Parasha. Your words are saved in your browser and will always be here when you return.\n\nThe Shabbat Times feature pulls live candle lighting and Havdalah times from the Hebcal API, based on any city you choose.`;
+
+function loadDvars() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    const migrated = {};
+    Object.keys(raw).forEach(id => {
+      if (Array.isArray(raw[id])) {
+        migrated[id] = raw[id].map((d,i) => ({ id:d.id || ('entry_'+Date.now()+'_'+i), title:d.title||'', body:d.body||'', year:d.year||'' }));
+      } else if (raw[id] && typeof raw[id] === 'object') {
+        migrated[id] = [{ id:'entry_'+id, title:raw[id].title||'', body:raw[id].body||'', year:raw[id].year||'' }];
+      }
+    });
+    return migrated;
+  } catch(e) { return {}; }
+}
+function saveDvars(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+function getDvarEntries(id) { return Array.isArray(dvars[id]) ? dvars[id] : []; }
+function getLatestDvar(id) { const a=getDvarEntries(id); return a.length ? a[a.length-1] : null; }
+function getAllEntryCount() { return Object.values(dvars).reduce((n,a)=>n+(Array.isArray(a)?a.length:0),0); }
+function getWordCount() { return Object.values(dvars).reduce((n,a)=>n+(Array.isArray(a)?a:[]).reduce((x,d)=>x+(d.body||'').split(/\s+/).filter(Boolean).length,0),0); }
+
+let dvars = loadDvars();
+let currentFilter = 'all';
+let selectedParashaId = null;
+let editingEntryId = null;
+let prevPageId = 'home';
+let shabbatData = null;
+
+// ═══════════════════════════════════════
+//  PAGE ROUTING
+// ═══════════════════════════════════════
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+  document.getElementById('page-' + id).classList.add('visible');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  const navMap = {home:0,archive:1,write:2,about:3};
+  if (navMap[id] !== undefined) document.querySelectorAll('nav button')[navMap[id]].classList.add('active');
+  if (id === 'home') renderHome();
+  if (id === 'archive') renderArchive();
+  if (id === 'write') renderPicker();
+  if (id === 'about') renderAbout();
+  window.scrollTo(0, 0);
+}
+
+function openReader(parashaId, entryId) {
+  const p = PARASHOT.find(x => x.id === parashaId);
+  const entries = getDvarEntries(parashaId);
+  if (!p || !entries.length) return;
+  const d = entries.find(x => x.id === entryId) || entries[entries.length-1];
+  prevPageId = document.querySelector('.page.visible').id.replace('page-','');
+  document.getElementById('reader-parasha').textContent = d.title || p.en;
+  document.getElementById('reader-hebrew').textContent = p.he;
+  document.getElementById('reader-meta').textContent = p.en + ' · ' + p.ref + (d.year ? ' · ' + d.year : '');
+  document.getElementById('reader-body').textContent = d.body || '';
+  let selector = document.getElementById('reader-entry-selector');
+  if (!selector) {
+    selector = document.createElement('div');
+    selector.id='reader-entry-selector';
+    selector.style.cssText='margin:1rem 0;text-align:center;';
+    document.getElementById('reader-body').before(selector);
+  }
+  selector.innerHTML = entries.length > 1 ? `<span style="color:var(--muted);margin-right:.5rem;">Years:</span>` + entries.map((e,i)=>`<button class="entry-btn" onclick="openReader('${p.id}','${e.id}')">${esc(e.year || ('Entry '+(i+1)))}</button>`).join(' ') : '';
+  document.querySelectorAll('.page').forEach(pg => pg.classList.remove('visible'));
+  document.getElementById('page-reader').classList.add('visible');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  window.scrollTo(0,0);
+}
+function goBack() { showPage(prevPageId); }
+
+// ═══════════════════════════════════════
+//  HOME
+// ═══════════════════════════════════════
+function renderHome() {
+  const total = PARASHOT.length;
+  const written = Object.keys(dvars).filter(id=>getDvarEntries(id).length).length;
+  const words = getWordCount();
+  document.getElementById('home-stats').innerHTML = `
+    <div class="stat-item"><span class="stat-num">${written}</span><span class="stat-lbl">Parashot Written</span></div>
+    <div class="stat-item"><span class="stat-num">${total - written}</span><span class="stat-lbl">Remaining</span></div>
+    <div class="stat-item"><span class="stat-num">${words.toLocaleString()}</span><span class="stat-lbl">Words</span></div>`;
+  renderParashotGrid();
+  fetchShabbatForHome();
+}
+function filterParashot(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderParashotGrid();
+}
+function renderParashotGrid() {
+  let list = PARASHOT;
+  if (currentFilter === 'written') list = list.filter(p => getDvarEntries(p.id).length);
+  else if (currentFilter === 'empty') list = list.filter(p => !getDvarEntries(p.id).length);
+  else if (BOOKS.includes(currentFilter)) list = list.filter(p => p.book === currentFilter);
+  document.getElementById('parashot-count').textContent = `${list.length} parasha${list.length!==1?'t':''}`;
+  document.getElementById('parashot-grid').innerHTML = list.length ? list.map(p => {
+    const entries = getDvarEntries(p.id), d = getLatestDvar(p.id);
+    return `<div class="parasha-card ${d?'has-dvar':''}" onclick="${d ? `openReader('${p.id}')` : `openWrite('${p.id}')`}">
+      <div class="book-tag">${p.book} · ${p.ref}</div><h4>${p.en}</h4><div class="hebrew-name">${p.he}</div>
+      ${d ? `<div class="excerpt">${esc(d.title||d.body||'').slice(0,100)}${(d.title||d.body||'').length>100?'…':''}</div>` : ''}
+      <div class="card-footer"><span class="dvar-badge ${d?'written':'empty'}">${d?(entries.length>1?entries.length+' Divrei Torah':'Dvar written'):'Not yet written'}</span>${d&&d.year?`<span class="date-hint">${esc(d.year)}</span>`:''}</div>
+    </div>`;
+  }).join('') : '<div class="empty-state">No parashot match this filter.</div>';
+}
+
+// ═══════════════════════════════════════
+//  ARCHIVE
+// ═══════════════════════════════════════
+function renderArchive() {
+  const container = document.getElementById('archive-content');
+  container.innerHTML = BOOKS.map(book => {
+    const parashot = PARASHOT.filter(p => p.book === book);
+    return `<div class="book-section"><div class="book-heading">${book} <span class="bk-hebrew">${BOOK_HEBREW[book]}</span></div><div class="archive-list">
+      ${parashot.map(p => { const entries=getDvarEntries(p.id), d=getLatestDvar(p.id); return `<div class="archive-item" onclick="${d?`openReader('${p.id}')`:`openWrite('${p.id}')`}">
+        <span class="ai-name">${p.en}</span><span class="ai-hebrew">${p.he}</span>${d&&d.title?`<span style="flex:1;font-style:italic;font-size:.85rem;color:var(--muted)">${esc(d.title)}</span>`:''}
+        <span class="ai-badge ${d?'has':'none'}">${d?(entries.length>1?entries.length+' Written':'Written'):'—'}</span></div>`; }).join('')}</div></div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+//  WRITE
+// ═══════════════════════════════════════
+function openWrite(parashaId) {
+  prevPageId = document.querySelector('.page.visible').id.replace('page-','');
+  showPage('write');
+  selectParasha(parashaId);
+}
+function renderPicker() {
+  document.getElementById('parasha-picker').innerHTML = PARASHOT.map(p => `<div class="picker-item ${p.id===selectedParashaId?'selected':''}" onclick="selectParasha('${p.id}')"><span>${p.en}</span><span class="pi-hebrew">${p.he}</span></div>`).join('');
+}
+function selectParasha(id) {
+  selectedParashaId = id; editingEntryId = null;
+  const p=PARASHOT.find(x=>x.id===id), entries=getDvarEntries(id);
+  document.getElementById('write-title').textContent=p.en;
+  document.getElementById('write-sub').textContent=p.he+' · '+p.ref;
+  document.getElementById('f-title').value=''; document.getElementById('f-body').value=''; document.getElementById('f-year').value='';
+  document.getElementById('delete-btn').style.display='none';
+  renderEntryList(); renderPicker();
+}
+function renderEntryList() {
+  const wrap=document.getElementById('saved-entries'); if(!wrap) return;
+  const entries=getDvarEntries(selectedParashaId);
+  wrap.innerHTML=entries.length ? `<h4>Saved Divrei Torah (${entries.length})</h4>`+entries.map((d,i)=>`<div class="entry-row"><div class="entry-info"><span class="entry-title">${esc(d.title||'Untitled Dvar Torah')}</span><span class="entry-year">${esc(d.year||('Entry '+(i+1)))}</span></div><div class="entry-actions"><button class="entry-btn" onclick="editDvar('${d.id}')">Edit</button><button class="entry-btn" onclick="readEntry('${d.id}')">Read</button></div></div>`).join('') : '<div class="multi-badge">No saved entries yet. Write your first Dvar Torah below.</div>';
+}
+function editDvar(entryId) {
+  const d=getDvarEntries(selectedParashaId).find(x=>x.id===entryId); if(!d) return;
+  editingEntryId=entryId;
+  document.getElementById('f-title').value=d.title||''; document.getElementById('f-body').value=d.body||''; document.getElementById('f-year').value=d.year||'';
+  document.getElementById('delete-btn').style.display='inline-block';
+  document.getElementById('save-btn').textContent='Update Dvar Torah';
+  document.getElementById('f-body').focus();
+}
+function readEntry(entryId) { openReader(selectedParashaId,entryId); }
+function saveDvar() {
+  if(!selectedParashaId){showToast('Please select a Parasha first.');return;}
+  const body=document.getElementById('f-body').value.trim(); if(!body){showToast('Please write your Dvar Torah.');return;}
+  const title=document.getElementById('f-title').value.trim(), year=document.getElementById('f-year').value.trim();
+  if(!dvars[selectedParashaId]) dvars[selectedParashaId]=[];
+  if(editingEntryId){ const d=dvars[selectedParashaId].find(x=>x.id===editingEntryId); if(d){d.title=title;d.body=body;d.year=year;} }
+  else dvars[selectedParashaId].push({id:'entry_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),title,body,year});
+  saveDvars(dvars); renderEntryList(); renderHome();
+  showToast(editingEntryId?'Dvar Torah updated!':'Dvar Torah saved!');
+  editingEntryId=null; document.getElementById('save-btn').textContent='Save Dvar Torah'; document.getElementById('delete-btn').style.display='none';
+  document.getElementById('f-title').value=''; document.getElementById('f-body').value=''; document.getElementById('f-year').value='';
+}
+function deleteDvar() {
+  if(!selectedParashaId||!editingEntryId)return;
+  if(!confirm('Delete this Dvar Torah?'))return;
+  dvars[selectedParashaId]=getDvarEntries(selectedParashaId).filter(d=>d.id!==editingEntryId);
+  if(!dvars[selectedParashaId].length) delete dvars[selectedParashaId];
+  saveDvars(dvars); clearForm(); renderEntryList(); renderHome(); showToast('Deleted.');
+}
+function clearForm() {
+  editingEntryId=null; document.getElementById('f-title').value='';document.getElementById('f-body').value='';document.getElementById('f-year').value='';document.getElementById('delete-btn').style.display='none';document.getElementById('save-btn').textContent='Save Dvar Torah';
+}
+
+// ═══════════════════════════════════════
+// ABOUT
+// ═══════════════════════════════════════
+function getAboutText(){ return localStorage.getItem(ABOUT_KEY) || DEFAULT_ABOUT; }
+function renderAbout(){
+  const display=document.getElementById('about-display'); if(display) display.textContent=getAboutText();
+  const editor=document.getElementById('about-editor'); if(editor) editor.style.display='none';
+  const btn=document.getElementById('edit-about-btn'); if(btn) btn.style.display='inline-block';
+}
+function editAbout(){
+  document.getElementById('about-textarea').value=getAboutText();
+  document.getElementById('about-display').style.display='none'; document.getElementById('about-editor').style.display='block'; document.getElementById('edit-about-btn').style.display='none';
+  document.getElementById('about-textarea').focus();
+}
+function saveAbout(){ localStorage.setItem(ABOUT_KEY,document.getElementById('about-textarea').value.trim()||DEFAULT_ABOUT); renderAbout(); showToast('About page saved!'); }
+function cancelAboutEdit(){ renderAbout(); }
+
+// ═══════════════════════════════════════
+//  SHABBAT TIMES (Hebcal API)
+// ═══════════════════════════════════════
+async function fetchShabbatTimes(lat, lng, cityName) {
+  try {
+    const url = `https://www.hebcal.com/shabbat?cfg=json&geo=pos&latitude=${lat}&longitude=${lng}&m=50&b=18`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const candles = data.items.find(i => i.category === 'candles');
+    const havdalah = data.items.find(i => i.category === 'havdalah');
+    const parasha = data.items.find(i => i.category === 'parashat');
+
+    const fmt = t => t ? new Date(t).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}) : '—';
+    const date = candles ? new Date(candles.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
+
+    shabbatData = {
+      city: cityName,
+      parasha: parasha ? parasha.hebrew + ' · ' + parasha.title.replace('Parashat ','') : 'Shabbat',
+      parashaEn: parasha ? parasha.title.replace('Parashat ','') : '',
+      parashaHe: parasha ? parasha.hebrew : '',
+      candles: fmt(candles?.date),
+      havdalah: fmt(havdalah?.date),
+      date,
+    };
+
+    updateHomeCard();
+    updateHeaderPill();
+    return shabbatData;
+  } catch(e) {
+    showToast('Could not fetch Shabbat times. Please try again.');
+    return null;
+  }
+}
+
+function updateHomeCard() {
+  if (!shabbatData) return;
+  document.getElementById('sc-parasha').textContent = shabbatData.parashaEn || 'Shabbat';
+  document.getElementById('sc-parasha-heb').textContent = shabbatData.parashaHe;
+  document.getElementById('sc-candles').textContent = shabbatData.candles;
+  document.getElementById('sc-havdalah').textContent = shabbatData.havdalah;
+}
+
+function updateHeaderPill() {
+  if (!shabbatData) return;
+  document.getElementById('header-times').textContent =
+    `Candles ${shabbatData.candles} · ${shabbatData.city}`;
+}
+
+async function fetchShabbatForHome() {
+  const saved = localStorage.getItem(LOC_KEY);
+  if (saved) {
+    const loc = JSON.parse(saved);
+    await fetchShabbatTimes(loc.lat, loc.lng, loc.city);
+  } else {
+    // Default: Jerusalem
+    await fetchShabbatTimes(31.7683, 35.2137, 'Jerusalem');
+  }
+}
+
+// Modal
+function openModal() { document.getElementById('modal').classList.add('open'); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) closeModal();
+});
+
+function detectLocation() {
+  if (!navigator.geolocation) { showToast('Geolocation not supported.'); return; }
+  showToast('Detecting location…');
+  navigator.geolocation.getCurrentPosition(async pos => {
+    const { latitude: lat, longitude: lng } = pos.coords;
+    const data = await fetchShabbatTimes(lat, lng, 'Your Location');
+    if (data) {
+      localStorage.setItem(LOC_KEY, JSON.stringify({ lat, lng, city: 'Your Location' }));
+      showTimesResult(data);
+    }
+  }, () => showToast('Could not detect location.'));
+}
+
+function useJerusalem() {
+  fetchByCoords(31.7683, 35.2137, 'Jerusalem');
+}
+
+async function fetchByCity() {
+  const city = document.getElementById('city-input').value.trim();
+  if (!city) return;
+
+  // Use Hebcal geo search
+  try {
+    const res = await fetch(`https://www.hebcal.com/geo/cities.json`);
+    const cities = await res.json();
+    const found = cities.find(c => c.name.toLowerCase().includes(city.toLowerCase()) || (c.asciiname||'').toLowerCase().includes(city.toLowerCase()));
+    if (found) {
+      await fetchByCoords(found.latitude, found.longitude, found.name);
+    } else {
+      // Fallback: try geocoding via Nominatim
+      const geo = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&limit=1`);
+      const geoData = await geo.json();
+      if (geoData.length) {
+        await fetchByCoords(parseFloat(geoData[0].lat), parseFloat(geoData[0].lon), geoData[0].display_name.split(',')[0]);
+      } else {
+        showToast('City not found. Try a different spelling.');
+      }
+    }
+  } catch(e) {
+    showToast('Error searching for city.');
+  }
+}
+
+async function fetchByCoords(lat, lng, city) {
+  showToast('Fetching Shabbat times…');
+  const data = await fetchShabbatTimes(lat, lng, city);
+  if (data) {
+    localStorage.setItem(LOC_KEY, JSON.stringify({ lat, lng, city }));
+    showTimesResult(data);
+  }
+}
+
+function showTimesResult(data) {
+  const result = document.getElementById('times-result');
+  document.getElementById('tr-parasha').textContent = `${data.parashaEn} · ${data.city}`;
+  document.getElementById('tr-grid').innerHTML = `
+    <div class="t-cell"><span class="tc-label">📅 Date</span><span class="tc-val">${data.date}</span></div>
+    <div class="t-cell"><span class="tc-label">🕍 Parasha</span><span class="tc-val">${data.parashaHe}</span></div>
+    <div class="t-cell"><span class="tc-label">🕯️ Candle Lighting</span><span class="tc-val">${data.candles}</span></div>
+    <div class="t-cell"><span class="tc-label">✨ Havdalah</span><span class="tc-val">${data.havdalah}</span></div>
+  `;
+  result.classList.add('show');
+}
+
+// ═══════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════
+function esc(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+renderHome();
+renderAbout();
+</script>
+</body>
+</html>
